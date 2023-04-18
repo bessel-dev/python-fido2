@@ -33,6 +33,7 @@ from ..utils import LOG_LEVEL_TRAFFIC
 from threading import Event
 from enum import IntEnum, IntFlag, unique
 from typing import Tuple, Optional, Callable, Iterator
+from .myfacade import make_list_descriptors, make_get_descriptor, make_open_connection
 import struct
 import sys
 import os
@@ -57,9 +58,9 @@ else:
     raise Exception("Unsupported platform")
 
 
-list_descriptors = backend.list_descriptors
-get_descriptor = backend.get_descriptor
-open_connection = backend.open_connection
+list_descriptors = make_list_descriptors(backend.list_descriptors)
+get_descriptor = make_get_descriptor(backend.get_descriptor)
+open_connection = make_open_connection(backend.open_connection)
 
 
 @unique
